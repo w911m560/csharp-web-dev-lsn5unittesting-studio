@@ -26,18 +26,34 @@ namespace BalancedBracketsNS
         public static bool HasBalancedBrackets(String str)
         {
             int brackets = 0;
+            bool isMisordered;
+            int leftBracketPosition = 0;
+            int rightBracketPosition = 0;
+
             foreach (char ch in str.ToCharArray())
             {
                 if (ch == '[')
                 {
                     brackets++;
+                    leftBracketPosition = str.IndexOf(ch);
                 }
                 else if (ch == ']')
                 {
                     brackets--;
+                    rightBracketPosition = str.IndexOf(ch);
                 }
             }
-            return brackets == 0;
+        
+            if (leftBracketPosition > rightBracketPosition)
+            {
+                isMisordered = true;
+            }
+            else
+            {
+                isMisordered = false;
+            }
+
+            return brackets == 0 && !isMisordered;
         }
     }
 }
